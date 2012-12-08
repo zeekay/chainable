@@ -8,7 +8,7 @@ Extend the `Chainable` class and use the `chainable` combinator to designate asy
 ```coffeescript
 {chainable, Chainable} = require 'chainable'
 
-class Test extends Chainable
+class Calculator extends Chainable
   numbers: []
 
   number: chainable (number, callback) ->
