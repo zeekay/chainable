@@ -1,0 +1,22 @@
+{
+  "name": "chainable",
+  "version": "0.1.0",
+  "description": "Create fluent asynchronous APIs.",
+  "main": "lib/",
+  "devDependencies": {
+    "chai": "~1.4.0",
+    "executive": "~0.1.8",
+    "mocha": "~1.7.4",
+    "coffee-script": "~1.4.0"
+  },
+  "scripts": {
+    "test": "cake test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https:://github.com/zeekay/chainable"
+  },
+  "author": "Zach Kelling <zeekayy@gmail.com> (http://whatit.is)",
+  "license": "BSD",
+  "readmeFilename": "README.md"
+}
