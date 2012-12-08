@@ -33,6 +33,4 @@ test.number(4)
     .wait()
     .add()
     .end (err, result) ->
-      result.should.equal 9
-      done()
-```
+        # result == 9
