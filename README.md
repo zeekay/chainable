@@ -2,10 +2,12 @@
 Create fluent asynchronous APIs.
 
 ## Usage
-Extend the `Chainable` class and use the `chainable` combinator to designate asynchronous methods as being chainable.
-Methods wrapped with the `chainable` combinator will be treated as chainable when they are not passed a callback. Each method
-in the chain will be executed in series, passing it's result to the next method. Chaining essentially queues up the methods, use
-`end` to signal you are ready to begin computation.
+Extend the `Chainable` class and use the `chainable` combinator to designate
+asynchronous methods as being chainable.  Methods wrapped with the `chainable`
+combinator will be treated as chainable when they are not passed a callback.
+Each method in the chain will be executed in series, passing it's result to the
+next method. Pass a callback to the final method to end the chain and begin
+computation.
 
 ## Example
 ```coffeescript
@@ -34,6 +36,5 @@ test = new Test()
 test.number(4)
     .number(5)
     .wait()
-    .add()
-    .end (err, result) ->
+    .add (err, result) ->
         # result == 9

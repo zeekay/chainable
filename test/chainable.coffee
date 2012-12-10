@@ -19,7 +19,7 @@ class Test extends Chainable
     callback null, result
 
   wait: chainable (callback) ->
-    setTimeout ->
+    setTimeout =>
       callback null
     , 100
 
@@ -29,7 +29,6 @@ describe 'Chainable', ->
     test.number(4)
         .number(5)
         .wait()
-        .add()
-        .end (err, result) ->
+        .add (err, result) ->
           result.should.equal 9
           done()

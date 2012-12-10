@@ -1,18 +1,21 @@
 class Chainable
   constructor: ->
     @__queue = []
-    @__result = null
 
   __add: (fn, args) ->
     @__queue.push [fn, args]
 
-  end: (callback) ->
+  __end: (callback) ->
+    err = null
     result = null
+
+    done = =>
+      # return with last result
+      callback.apply @, [err].concat result
 
     iterate = =>
       if @__queue.length == 0
-        # return with last result
-        callback.apply @, [null].concat result
+        done()
       else
         # pop off next method to execute
         [fn, args] = @__queue.shift()
@@ -25,13 +28,15 @@ class Chainable
         # add callback to continue iteration
         args.push ->
           _args = Array.prototype.slice.call arguments
+
           # check for error
           err = _args.shift()
-          if err?
-            callback err
-          else
-            result = _args
+          return done() if err?
+
+          # store result and continue iteration
+          result = _args
           iterate()
+
         fn.apply @, args
 
     iterate()
@@ -42,11 +47,18 @@ chainable = (fn) ->
     args = Array.prototype.slice.call arguments
     if typeof args[args.length-1] == 'function'
       # Callback exists, don't queue up result.
-      fn.apply @, args
+      if @__queue.length > 0
+        # we are in the middle of a chain, end it
+        @__end =>
+          _args = Array.prototype.slice.call arguments
+          fn.apply @, args.concat _args
+      else
+        # method used outside of a chain
+        fn.apply @, args
     else
       # Queue up method
       @__add fn, args
-      @
+    @
 
 module.exports =
   Chainable: Chainable
