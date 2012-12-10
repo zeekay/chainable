@@ -1,6 +1,6 @@
 {
   "name": "chainable",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create fluent asynchronous APIs.",
   "main": "lib/",
   "devDependencies": {
