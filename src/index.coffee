@@ -61,11 +61,14 @@ chainable = (fn) ->
     @
 
 wrapper = (fn) ->
-  if @constructor == chainable
+  if @constructor == wrapper
     return new Chainable()
 
   chainable fn
 
+wrapper:: = Chainable::
+
 wrapper.Chainable = Chainable
 wrapper.chainable = chainable
+
 module.exports = wrapper

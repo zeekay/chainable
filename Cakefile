@@ -12,7 +12,6 @@ task 'watch', 'watch for changes and recompile project', ->
   exec './node_modules/.bin/coffee -bc -m -w -o lib/ src/'
 
 task 'test', 'run tests', (options) ->
-  tests = options.tests ? 'test/integration'
   if options.grep?
     grep = "--grep #{options.grep}"
   else
@@ -26,15 +25,7 @@ task 'test', 'run tests', (options) ->
         --require test/_helper.js
         --timeout 15000
         #{grep}
-        #{tests}"
-
-task 'test:unit', 'run tests', (options) ->
-  options.tests = 'test/unit/'
-  invoke 'test'
-
-task 'test:integration', 'run integration tests', (options) ->
-  options.tests = 'test/integration/'
-  invoke 'test'
+        test/"
 
 task 'publish', 'Publish current version to npm', ->
   exec [

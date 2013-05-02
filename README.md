@@ -13,7 +13,7 @@ computation.
 ```coffeescript
 chainable = require 'chainable'
 
-class Calculator extends chainable.Chainable
+class Calculator extends chainable
   numbers: []
 
   number: chainable (number, callback) ->

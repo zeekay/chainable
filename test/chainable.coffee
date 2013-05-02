@@ -2,9 +2,9 @@ chai = require 'chai'
 assert = chai.assert
 should = chai.should()
 
-{chainable, Chainable} = require '../src'
+chainable = require '../'
 
-class Test extends Chainable
+class Test extends chainable
   numbers: []
 
   number: chainable (number, callback) ->
@@ -23,7 +23,7 @@ class Test extends Chainable
       callback null
     , 100
 
-describe 'Chainable', ->
+describe 'chainable', ->
   it 'should allow chainable asynchronous method calls', (done) ->
     test = new Test()
     test.number(4)
