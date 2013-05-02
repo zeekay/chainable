@@ -60,6 +60,12 @@ chainable = (fn) ->
       @__add fn, args
     @
 
-module.exports =
-  Chainable: Chainable
-  chainable: chainable
+wrapper = (fn) ->
+  if @constructor == chainable
+    return new Chainable()
+
+  chainable fn
+
+wrapper.Chainable = Chainable
+wrapper.chainable = chainable
+module.exports = wrapper

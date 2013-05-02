@@ -11,9 +11,9 @@ computation.
 
 ## Example
 ```coffeescript
-{chainable, Chainable} = require 'chainable'
+chainable = require 'chainable'
 
-class Calculator extends Chainable
+class Calculator extends chainable.Chainable
   numbers: []
 
   number: chainable (number, callback) ->
