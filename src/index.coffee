@@ -1,3 +1,5 @@
+{slice} = Array.prototype
+
 class Chainable
   constructor: ->
     @__queue = []
@@ -6,52 +8,41 @@ class Chainable
     @__queue.push [fn, args]
 
   __end: (callback) ->
-    err = null
     result = null
 
-    done = =>
-      # return with last result
-      callback.apply @, [err].concat result
-
     iterate = =>
-      if @__queue.length == 0
-        done()
-      else
-        # pop off next method to execute
-        [fn, args] = @__queue.shift()
+      # pop off next method
+      [fn, args] = @__queue.shift()
 
-        # pass along result of previous method call
-        if result?
-          args = args.concat result
-          result = null
+      # add callback to continue iteration
+      args.push =>
+        result = slice.call arguments, 0
 
-        # add callback to continue iteration
-        args.push ->
-          _args = Array.prototype.slice.call arguments
+        # check for error
+        if (err = result.shift())?
+          return callback err
 
-          # check for error
-          err = _args.shift()
-          return done() if err?
-
-          # store result and continue iteration
-          result = _args
+        if @__queue.length == 0
+          callback()
+        else
           iterate()
 
-        fn.apply @, args
+      # call next method
+      fn.apply @, args
 
     iterate()
 
 # makes an async function chainable
 chainable = (fn) ->
   ->
-    args = Array.prototype.slice.call arguments
-    if typeof args[args.length-1] == 'function'
+    args = slice.call arguments, 0
+    if fn.length == args.length
       # Callback exists, don't queue up result.
       if @__queue.length > 0
         # we are in the middle of a chain, end it
-        @__end =>
-          _args = Array.prototype.slice.call arguments
-          fn.apply @, args.concat _args
+        @__end (err) =>
+          return args.pop() err if err?
+          fn.apply @, args
       else
         # method used outside of a chain
         fn.apply @, args
