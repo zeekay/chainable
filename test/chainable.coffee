@@ -1,6 +1,4 @@
-chai = require 'chai'
-assert = chai.assert
-should = chai.should()
+should = require('chai').should()
 
 chainable = require '../'
 

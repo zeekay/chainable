@@ -4,9 +4,10 @@ node_js:
   - 0.11
 script: >
   ./node_modules/.bin/mocha --reporter spec \
+                              --timeout 5000
                               --compilers coffee:coffee-script/register \
                               --require postmortem/register \
-                              .test
+                              test
 cache:
   directories:
     - node_modules
