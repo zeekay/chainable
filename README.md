@@ -1,4 +1,4 @@
-# chainable
+# chainable [![Build Status](https://travis-ci.org/zeekay/chainable.svg?branch=master)](https://travis-ci.org/zeekay/chainable)
 Create fluent asynchronous APIs.
 
 ## Usage
