@@ -3,15 +3,9 @@
   "version": "0.1.4",
   "description": "Create fluent asynchronous APIs.",
   "main": "lib/",
-  "devDependencies": {
-    "chai": "~1.4.0",
-    "executive": "~0.2.0",
-    "mocha": "~1.7.4",
-    "coffee-script": "~1.6.2",
-    "source-map-support": "~0.1.4"
-  },
   "scripts": {
-    "test": "cake test"
+    "test": "cake test",
+    "prepublish": "cake build"
   },
   "repository": {
     "type": "git",
@@ -19,5 +13,11 @@
   },
   "author": "Zach Kelling <zeekayy@gmail.com> (http://whatit.is)",
   "license": "BSD",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "coffee-script": "~1.7.1",
+    "executive": "~0.4.7",
+    "mocha": "^1.18.2"
+  }
 }
