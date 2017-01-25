@@ -1,4 +1,6 @@
 # chainable [![Build Status](https://travis-ci.org/zeekay/chainable.svg?branch=master)](https://travis-ci.org/zeekay/chainable)
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/zeekay/chainable.svg)](https://greenkeeper.io/)
 Create fluent asynchronous APIs.
 
 ## Usage
